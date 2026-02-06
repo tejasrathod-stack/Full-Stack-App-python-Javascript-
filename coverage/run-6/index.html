@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coverage Report — Full-Stack-App-python-Javascript-</title>
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --success: #1e8e3e;
+      --danger: #d93025;
+      --warn: #f9ab00;
+      --bg: #f8f9fa;
+      --card: #ffffff;
+      --text: #202124;
+      --muted: #5f6368;
+      --border: #dadce0;
+      --cov-hue: 142;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+    }
+    .header h1 { font-size: 1.8rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .header p { opacity: 0.8; font-size: 0.95rem; }
+    .status-banner {
+      padding: 0.75rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+    }
+    .status-passed { background: var(--success); color: white; }
+    .status-failed { background: var(--danger); color: white; }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      transition: box-shadow 0.2s;
+    }
+    .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+    .card-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .card-value {
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .card-sub { font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem; }
+
+    /* Coverage ring */
+    .cov-ring-card { display: flex; align-items: center; gap: 1.5rem; }
+    .cov-ring {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      flex-shrink: 0;
+    }
+    .cov-ring svg { transform: rotate(-90deg); }
+    .cov-ring-bg { fill: none; stroke: #e8eaed; stroke-width: 8; }
+    .cov-ring-fill {
+      fill: none;
+      stroke: hsl(var(--cov-hue), 70%, 45%);
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-dasharray: 314;
+      stroke-dashoffset: 11;
+      transition: stroke-dashoffset 1s ease;
+    }
+    .cov-ring-text {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: hsl(var(--cov-hue), 70%, 40%);
+    }
+    .cov-info { flex: 1; }
+    .cov-info .label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+    .cov-info .rating {
+      font-size: 1rem;
+      font-weight: 600;
+      color: hsl(var(--cov-hue), 70%, 40%);
+      margin-top: 0.25rem;
+    }
+
+    /* Delta badge */
+    .delta-positive { color: var(--success); }
+    .delta-negative { color: var(--danger); }
+    .delta-neutral { color: var(--muted); }
+
+    /* Progress bar */
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e8eaed;
+      border-radius: 4px;
+      margin-top: 0.75rem;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: hsl(var(--cov-hue), 70%, 45%);
+      transition: width 1s ease;
+    }
+
+    /* Section */
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    /* CTA button */
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: #1557b0; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+    .btn-outline:hover { background: var(--primary); color: white; }
+    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+
+    /* Meta bar */
+    .meta-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 1rem 0;
+      margin-top: 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* Table styling */
+    .quality-table { width: 100%; border-collapse: collapse; margin-top: 0.75rem; }
+    .quality-table th, .quality-table td {
+      padding: 0.6rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .quality-table th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
+    .badge {
+      display: inline-block;
+      padding: 0.15rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .badge-pass { background: #e6f4ea; color: var(--success); }
+    .badge-fail { background: #fce8e6; color: var(--danger); }
+
+    @media (max-width: 600px) {
+      .container { padding: 1rem; }
+      .grid { grid-template-columns: 1fr 1fr; }
+      .cov-ring-card { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Coverage Report</h1>
+    <p>Full-Stack-App-python-Javascript- &mdash; master &mdash; Run #6</p>
+  </div>
+
+  <div class="status-banner status-passed">Quality Gate Passed</div>
+
+  <div class="container">
+    <!-- Coverage Overview -->
+    <div class="grid">
+      <div class="card cov-ring-card" style="grid-column: span 2;">
+        <div class="cov-ring">
+          <svg width="110" height="110" viewBox="0 0 110 110">
+            <circle class="cov-ring-bg" cx="55" cy="55" r="50"/>
+            <circle class="cov-ring-fill" cx="55" cy="55" r="50"/>
+          </svg>
+          <div class="cov-ring-text">96.49%</div>
+        </div>
+        <div class="cov-info">
+          <div class="label">Final Coverage</div>
+          <div class="rating">Excellent</div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 96.49%"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-top:0.25rem;">
+            <span style="font-size:0.75rem; color:var(--muted);">0%</span>
+            <span style="font-size:0.75rem; color:var(--muted);">100%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Before</div>
+        <div class="card-value">0%</div>
+        <div class="card-sub">Manual tests coverage</div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Improvement</div>
+        <div class="card-value delta-positive">+96.49 pp</div>
+        <div class="card-sub">Coverage delta</div>
+      </div>
+    </div>
+
+    <!-- Test Results -->
+    <h3 class="section-title">Test Results</h3>
+    <div class="grid" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="card" style="text-align:center;">
+        <div class="card-label">Generated</div>
+        <div class="card-value" style="color: var(--primary);">3</div>
+        <div class="card-sub">test files</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div class="card-label">Total</div>
+        <div class="card-value">21</div>
+        <div class="card-sub">test cases</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div class="card-label">Passed</div>
+        <div class="card-value" style="color: var(--success);">18</div>
+        <div class="card-sub">86% pass rate</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div class="card-label">Failed</div>
+        <div class="card-value" style="color: var(--danger);">3</div>
+        <div class="card-sub">test cases</div>
+      </div>
+    </div>
+
+    <!-- Quality Gates -->
+    <h3 class="section-title">Quality Gates</h3>
+    <div class="card">
+      <table class="quality-table">
+        <thead>
+          <tr><th>Gate</th><th>Required</th><th>Actual</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Coverage Threshold</td>
+            <td>&ge; 80%</td>
+            <td>96.49%</td>
+            <td><span class="badge badge-pass">PASSED</span></td>
+          </tr>
+          <tr>
+            <td>Delta Threshold</td>
+            <td>&ge; 0 pp</td>
+            <td>+96.49 pp</td>
+            <td><span class="badge badge-pass">PASSED</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="btn-group">
+      <a class="btn btn-primary" href="detail/index.html">View Detailed File Coverage</a>
+      <a class="btn btn-outline" href="https://github.com/Tejas4560/Full-Stack-App-python-Javascript-/actions/runs/21758053972">View Pipeline Run</a>
+    </div>
+
+    <div class="meta-bar">
+      <span>Generated by AI Test Generation Pipeline</span>
+      <span>2026-02-06 16:35 UTC</span>
+    </div>
+  </div>
+</body>
+</html>
