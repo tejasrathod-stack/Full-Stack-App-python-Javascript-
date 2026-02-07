@@ -4,7 +4,7 @@ on:
 
 jobs:
   run-tests:
-    uses: Tejas4560/improved-testgen/.github/workflows/ai-test-pipeline-v2.yml@T1
+    uses: Tejas4560/improved-testgen/.github/workflows/ai-test-pipeline-v2.yml@main
     permissions:
       contents: write        # Required for pushing to branch
       pages: write
