@@ -46,7 +46,7 @@
     .cov-ring { position: relative; width: 110px; height: 110px; flex-shrink: 0; }
     .cov-ring svg { transform: rotate(-90deg); }
     .cov-ring-bg { fill: none; stroke: #e8eaed; stroke-width: 8; }
-    .cov-ring-fill { fill: none; stroke: hsl(var(--cov-hue), 70%, 45%); stroke-width: 8; stroke-linecap: round; stroke-dasharray: 314; stroke-dashoffset: 11; transition: stroke-dashoffset 1s ease; }
+    .cov-ring-fill { fill: none; stroke: hsl(var(--cov-hue), 70%, 45%); stroke-width: 8; stroke-linecap: round; stroke-dasharray: 314; stroke-dashoffset: 0; transition: stroke-dashoffset 1s ease; }
     .cov-ring-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.5rem; font-weight: 700; color: hsl(var(--cov-hue), 70%, 40%); }
     .cov-info { flex: 1; }
     .cov-info .label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
@@ -112,15 +112,30 @@
     .test-summary-item { font-size: 0.85rem; color: var(--muted); }
     .test-summary-item strong { color: var(--text); font-size: 1.05rem; }
     .empty-state { text-align: center; padding: 3rem 2rem; color: var(--muted); font-size: 0.95rem; }
-    .kind-filters { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-    .kind-btn { padding: 0.35rem 0.85rem; border: 1px solid var(--border); border-radius: 16px; background: var(--card); cursor: pointer; font-size: 0.82rem; font-weight: 500; color: var(--muted); transition: all 0.2s; }
-    .kind-btn:hover { border-color: var(--primary); color: var(--primary); }
-    .kind-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
-    .kind-badge { display: inline-block; padding: 0.1rem 0.5rem; border-radius: 10px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
-    .kind-unit { background: #e8f0fe; color: #1a73e8; }
-    .kind-integ { background: #fef7e0; color: #e37400; }
-    .kind-e2e { background: #f3e8fd; color: #8430ce; }
-    .kind-sub { margin: 0.25rem 0 0.5rem 1rem; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; padding: 0.4rem 0.75rem; border-left: 3px solid var(--border); }
+    .fail-count-badge { background: var(--danger); color: white; border-radius: 10px; padding: 0.1rem 0.55rem; font-size: 0.72rem; font-weight: 700; margin-left: 0.4rem; vertical-align: middle; }
+    .fail-count-badge.zero { background: var(--success); }
+    .fail-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 1rem; overflow: hidden; transition: box-shadow 0.2s; }
+    .fail-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .fail-card-header { display: flex; align-items: center; gap: 0.75rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); background: #fce8e6; }
+    .fail-card-header .fail-icon { font-size: 1.1rem; }
+    .fail-card-header .fail-test-name { flex: 1; font-weight: 600; font-size: 0.9rem; word-break: break-all; font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace; }
+    .fail-card-location { display: flex; gap: 1.5rem; padding: 0.75rem 1.25rem; background: #f8f9fa; border-bottom: 1px solid #f1f3f4; font-size: 0.82rem; flex-wrap: wrap; }
+    .fail-card-location .loc-item { color: var(--muted); }
+    .fail-card-location .loc-item strong { color: var(--text); }
+    .fail-card-message { padding: 1rem 1.25rem; }
+    .fail-card-message .msg-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 0.4rem; }
+    .fail-card-message .msg-short { font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace; font-size: 0.85rem; color: var(--danger); font-weight: 600; }
+    .fail-traceback { margin-top: 0.5rem; }
+    .fail-traceback-toggle { background: none; border: 1px solid var(--border); border-radius: 6px; padding: 0.35rem 0.85rem; font-size: 0.78rem; cursor: pointer; color: var(--muted); transition: all 0.15s; }
+    .fail-traceback-toggle:hover { background: #f1f3f4; color: var(--text); }
+    .fail-traceback-content { display: none; margin-top: 0.75rem; padding: 1rem; background: #1a1a2e; color: #e8eaed; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace; font-size: 0.78rem; line-height: 1.7; overflow-x: auto; white-space: pre-wrap; word-break: break-all; max-height: 400px; overflow-y: auto; }
+    .fail-summary-banner { display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: var(--card); border: 2px solid var(--danger); border-radius: 12px; margin-bottom: 1.5rem; }
+    .fail-summary-banner .fail-big-count { font-size: 2.2rem; font-weight: 700; color: var(--danger); line-height: 1; }
+    .fail-summary-banner .fail-big-label { font-size: 0.9rem; color: var(--muted); }
+    .fail-zero-state { text-align: center; padding: 4rem 2rem; }
+    .fail-zero-state .check-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .fail-zero-state .check-text { font-size: 1.1rem; color: var(--success); font-weight: 600; }
+    .fail-zero-state .check-sub { font-size: 0.9rem; color: var(--muted); margin-top: 0.25rem; }
     @media (max-width: 600px) {
       .container { padding: 1rem; }
       .grid { grid-template-columns: 1fr 1fr; }
@@ -141,6 +156,7 @@
       <button class="tab-btn active" onclick="switchTab('overview',this)">Overview</button>
       <button class="tab-btn" onclick="switchTab('files',this)">File Coverage</button>
       <button class="tab-btn" onclick="switchTab('tests',this)">Test Details</button>
+      <button class="tab-btn" onclick="switchTab('failures',this)" id="failures-tab-btn">Failed Tests <span id="fail-tab-badge" class="fail-count-badge">0</span></button>
     </div>
     <div id="tab-overview" class="tab-content active">
       <div class="grid">
@@ -150,12 +166,12 @@
               <circle class="cov-ring-bg" cx="55" cy="55" r="50"/>
               <circle class="cov-ring-fill" cx="55" cy="55" r="50"/>
             </svg>
-            <div class="cov-ring-text">96.49%</div>
+            <div class="cov-ring-text">100.00%</div>
           </div>
           <div class="cov-info">
             <div class="label">Final Coverage</div>
             <div class="rating">Excellent</div>
-            <div class="progress-bar"><div class="progress-fill" style="width: 96.49%"></div></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 100.00%"></div></div>
             <div style="display:flex; justify-content:space-between; margin-top:0.25rem;">
               <span style="font-size:0.75rem; color:var(--muted);">0%</span>
               <span style="font-size:0.75rem; color:var(--muted);">100%</span>
@@ -163,28 +179,28 @@
           </div>
         </div>
         <div class="card"><div class="card-label">Before</div><div class="card-value">0%</div><div class="card-sub">Manual tests coverage</div></div>
-        <div class="card"><div class="card-label">Improvement</div><div class="card-value delta-positive">+96.49 pp</div><div class="card-sub">Coverage delta</div></div>
+        <div class="card"><div class="card-label">Improvement</div><div class="card-value delta-positive">+100.00 pp</div><div class="card-sub">Coverage delta</div></div>
       </div>
       <h3 class="section-title">Test Results</h3>
       <div class="grid" style="grid-template-columns: repeat(4, 1fr);">
         <div class="card" style="text-align:center;"><div class="card-label">Generated</div><div class="card-value" style="color: var(--primary);">3</div><div class="card-sub">test files</div></div>
-        <div class="card" style="text-align:center;"><div class="card-label">Total</div><div class="card-value">26</div><div class="card-sub">test cases</div></div>
-        <div class="card" style="text-align:center;"><div class="card-label">Passed</div><div class="card-value" style="color: var(--success);">17</div><div class="card-sub">65% pass rate</div></div>
-        <div class="card" style="text-align:center;"><div class="card-label">Failed</div><div class="card-value" style="color: var(--danger);">9</div><div class="card-sub">test cases</div></div>
+        <div class="card" style="text-align:center;"><div class="card-label">Total</div><div class="card-value">19</div><div class="card-sub">test cases</div></div>
+        <div class="card" style="text-align:center;"><div class="card-label">Passed</div><div class="card-value" style="color: var(--success);">19</div><div class="card-sub">100% pass rate</div></div>
+        <div class="card" style="text-align:center;"><div class="card-label">Failed</div><div class="card-value" style="color: var(--muted);">0</div><div class="card-sub">test cases</div></div>
       </div>
       <h3 class="section-title">Quality Gates</h3>
       <div class="card">
         <table class="quality-table">
           <thead><tr><th>Gate</th><th>Required</th><th>Actual</th><th>Status</th></tr></thead>
           <tbody>
-            <tr><td>Coverage Threshold</td><td>&ge; 80%</td><td>96.49%</td><td><span class="badge badge-pass">PASSED</span></td></tr>
-            <tr><td>Delta Threshold</td><td>&ge; 0 pp</td><td>+96.49 pp</td><td><span class="badge badge-pass">PASSED</span></td></tr>
+            <tr><td>Coverage Threshold</td><td>&ge; 80%</td><td>100.00%</td><td><span class="badge badge-pass">PASSED</span></td></tr>
+            <tr><td>Delta Threshold</td><td>&ge; 0 pp</td><td>+100.00 pp</td><td><span class="badge badge-pass">PASSED</span></td></tr>
           </tbody>
         </table>
       </div>
       <div class="btn-group">
         <a class="btn btn-primary" href="detail/index.html">View Raw Coverage Report</a>
-        <a class="btn btn-outline" href="https://github.com/Tejas4560/Full-Stack-App-python-Javascript-/actions/runs/21787532004">View Pipeline Run</a>
+        <a class="btn btn-outline" href="https://github.com/tejasrathod-stack/Full-Stack-App-python-Javascript-/actions/runs/21901326868">View Pipeline Run</a>
       </div>
     </div>
     <div id="tab-files" class="tab-content">
@@ -206,118 +222,41 @@
     </div>
     <div id="tab-tests" class="tab-content">
       <div id="test-summary" class="test-summary-bar"></div>
-      <div class="kind-filters">
-        <button class="kind-btn active" onclick="filterKind('all',this)">All</button>
-        <button class="kind-btn" onclick="filterKind('unit',this)">Unit</button>
-        <button class="kind-btn" onclick="filterKind('integ',this)">Integration</button>
-        <button class="kind-btn" onclick="filterKind('e2e',this)">E2E</button>
-      </div>
       <div class="search-bar"><input type="text" id="test-search" placeholder="Search tests by name, file, or class..." oninput="filterTests()"></div>
       <div id="test-groups"></div>
     </div>
+    <div id="tab-failures" class="tab-content">
+      <div id="fail-summary-banner"></div>
+      <div class="search-bar"><input type="text" id="fail-search" placeholder="Search failed tests by name, file, or error message..." oninput="filterFailures()"></div>
+      <div id="fail-cards"></div>
+    </div>
     <div class="meta-bar">
       <span>Generated by AI Test Generation Pipeline</span>
-      <span>2026-02-07 22:02 UTC</span>
+      <span>2026-02-11 10:25 UTC</span>
     </div>
   </div>
   <script src="data.js"></script>
   <script>
   (function(){
-    var D=window.PIPELINE_DATA||{files:[],tests:[]};
-    var sCol='c',sAsc=false,activeKind='all';
-    var kindLabels={unit:'Unit',integ:'Integration',e2e:'E2E'};
+    var D=window.PIPELINE_DATA||{files:[],tests:[]};var sCol='c',sAsc=false;
     function hue(c){return c>=90?142:c>=70?60:c>=50?30:0;}
-
-    /* ---- File Coverage Tab ---- */
-    function renderFileSummary(){
-      var el=document.getElementById('file-summary');if(!el||!D.files.length)return;
-      var ts=0,th=0,tm=0;D.files.forEach(function(f){ts+=f.s;th+=f.h;tm+=f.m;});
-      var avg=ts?Math.round(th/ts*100):0;
-      el.innerHTML='<div class="file-summary-item"><strong>'+D.files.length+'</strong> files analyzed</div><div class="file-summary-item"><strong>'+ts+'</strong> total statements</div><div class="file-summary-item"><strong>'+th+'</strong> covered</div><div class="file-summary-item"><strong>'+tm+'</strong> missed</div><div class="file-summary-item">Avg: <strong>'+avg+'%</strong></div>';
-    }
-    function renderFiles(q){
-      var tbody=document.getElementById('file-tbody');if(!tbody)return;
-      if(!D.files.length){tbody.innerHTML='<tr><td colspan="6" class="empty-state">No file coverage data available</td></tr>';return;}
-      var files=D.files.slice();
-      if(q){var ql=q.toLowerCase();files=files.filter(function(f){return f.f.toLowerCase().indexOf(ql)>=0;});}
-      files.sort(function(a,b){var va=a[sCol],vb=b[sCol];if(typeof va==='string')return sAsc?va.localeCompare(vb):vb.localeCompare(va);return sAsc?va-vb:vb-va;});
-      var html='';files.forEach(function(f){var h=hue(f.c);var link='detail/'+f.f.replace(/\//g,'_').replace(/\./g,'_')+'.html';html+='<tr><td><a class="file-link" href="'+link+'" title="'+f.f+'">'+f.f+'</a></td><td>'+f.s+'</td><td style="color:'+(f.m>0?'var(--danger)':'var(--muted)')+'">'+f.m+'</td><td>'+f.h+'</td><td style="font-weight:700;color:hsl('+h+',70%,40%)">'+f.c+'%</td><td><div class="mini-bar"><div class="mini-fill" style="width:'+f.c+'%;background:hsl('+h+',70%,45%)"></div></div></td></tr>';});
-      if(!html)html='<tr><td colspan="6" class="empty-state">No files match your search</td></tr>';
-      tbody.innerHTML=html;
-    }
+    function renderFileSummary(){var el=document.getElementById('file-summary');if(!el||!D.files.length)return;var ts=0,th=0,tm=0;D.files.forEach(function(f){ts+=f.s;th+=f.h;tm+=f.m;});var avg=ts?Math.round(th/ts*100):0;el.innerHTML='<div class="file-summary-item"><strong>'+D.files.length+'</strong> files analyzed</div><div class="file-summary-item"><strong>'+ts+'</strong> total statements</div><div class="file-summary-item"><strong>'+th+'</strong> covered</div><div class="file-summary-item"><strong>'+tm+'</strong> missed</div><div class="file-summary-item">Avg: <strong>'+avg+'%</strong></div>';}
+    function renderFiles(q){var tbody=document.getElementById('file-tbody');if(!tbody)return;if(!D.files.length){tbody.innerHTML='<tr><td colspan="6" class="empty-state">No file coverage data available</td></tr>';return;}var files=D.files.slice();if(q){var ql=q.toLowerCase();files=files.filter(function(f){return f.f.toLowerCase().indexOf(ql)>=0;});}files.sort(function(a,b){var va=a[sCol],vb=b[sCol];if(typeof va==='string')return sAsc?va.localeCompare(vb):vb.localeCompare(va);return sAsc?va-vb:vb-va;});var html='';files.forEach(function(f){var h=hue(f.c);var link='detail/'+f.f.replace(/\//g,'_').replace(/\./g,'_')+'.html';html+='<tr><td><a class="file-link" href="'+link+'" title="'+f.f+'">'+f.f+'</a></td><td>'+f.s+'</td><td style="color:'+(f.m>0?'var(--danger)':'var(--muted)')+'">'+f.m+'</td><td>'+f.h+'</td><td style="font-weight:700;color:hsl('+h+',70%,40%)">'+f.c+'%</td><td><div class="mini-bar"><div class="mini-fill" style="width:'+f.c+'%;background:hsl('+h+',70%,45%)"></div></div></td></tr>';});if(!html)html='<tr><td colspan="6" class="empty-state">No files match your search</td></tr>';tbody.innerHTML=html;}
     window.sortFiles=function(col){if(sCol===col)sAsc=!sAsc;else{sCol=col;sAsc=col==='f';}renderFiles(document.getElementById('file-search').value);};
     window.filterFiles=function(){renderFiles(document.getElementById('file-search').value);};
-
-    /* ---- Test Details Tab ---- */
-    function renderTestSummary(){
-      var el=document.getElementById('test-summary');if(!el||!D.tests.length){if(el)el.style.display='none';return;}
-      var p=0,f=0,s=0,e=0,ku=0,ki=0,ke=0;
-      D.tests.forEach(function(t){
-        if(t.o==='passed')p++;else if(t.o==='failed')f++;else if(t.o==='skipped')s++;else e++;
-        if(t.k==='unit')ku++;else if(t.k==='integ')ki++;else if(t.k==='e2e')ke++;
-      });
-      el.innerHTML='<div class="test-summary-item"><strong>'+D.tests.length+'</strong> total</div>'
-        +'<div class="test-summary-item" style="color:var(--success)"><strong>'+p+'</strong> passed</div>'
-        +(f?'<div class="test-summary-item" style="color:var(--danger)"><strong>'+f+'</strong> failed</div>':'')
-        +(s?'<div class="test-summary-item" style="color:var(--warn)"><strong>'+s+'</strong> skipped</div>':'')
-        +(e?'<div class="test-summary-item" style="color:var(--danger)"><strong>'+e+'</strong> errors</div>':'')
-        +'<div class="test-summary-item"><span class="kind-badge kind-unit">'+ku+' unit</span></div>'
-        +(ki?'<div class="test-summary-item"><span class="kind-badge kind-integ">'+ki+' integ</span></div>':'')
-        +(ke?'<div class="test-summary-item"><span class="kind-badge kind-e2e">'+ke+' e2e</span></div>':'');
-    }
-    function renderTests(q){
-      var container=document.getElementById('test-groups');if(!container)return;
-      if(!D.tests.length){container.innerHTML='<div class="empty-state">No test results available</div>';return;}
-      /* Filter by kind */
-      var filtered=D.tests;
-      if(activeKind!=='all'){filtered=filtered.filter(function(t){return t.k===activeKind;});}
-      /* Group by source file */
-      var groups={};
-      filtered.forEach(function(t){
-        var parts=t.n.split('::');var file=parts[0]||'unknown';
-        if(!groups[file])groups[file]=[];
-        groups[file].push({name:parts.slice(1).join(' :: '),outcome:t.o,duration:t.d,kind:t.k||'unit',raw:t.n});
-      });
-      var keys=Object.keys(groups).sort();
-      if(q){var ql=q.toLowerCase();keys=keys.filter(function(k){if(k.toLowerCase().indexOf(ql)>=0)return true;return groups[k].some(function(t){return t.raw.toLowerCase().indexOf(ql)>=0;});});}
-      var html='';var gid=0;
-      keys.forEach(function(file){
-        var tests=groups[file];
-        if(q){var ql=q.toLowerCase();if(file.toLowerCase().indexOf(ql)<0){tests=tests.filter(function(t){return t.raw.toLowerCase().indexOf(ql)>=0;});}}
-        if(!tests.length)return;
-        var passed=tests.filter(function(t){return t.outcome==='passed';}).length;
-        var failed=tests.filter(function(t){return t.outcome==='failed';}).length;
-        var bc=failed>0?'badge-failed':'badge-passed';
-        var st=failed>0?failed+' failed':'all passed';
-        /* Sub-group by kind within each file */
-        var kindMap={};tests.forEach(function(t){var k=t.kind;if(!kindMap[k])kindMap[k]=[];kindMap[k].push(t);});
-        var kindOrder=['unit','integ','e2e'];
-        html+='<div class="test-group"><div class="test-group-header expanded" onclick="toggleGroup('+gid+')">'
-          +'<span class="chevron open" id="chev-'+gid+'">&#9654;</span>'
-          +'<span style="flex:1;word-break:break-all">'+file+'</span>'
-          +'<span class="badge '+bc+'">'+st+'</span>'
-          +'<span style="color:var(--muted);font-size:0.78rem">'+tests.length+' tests</span>'
-          +'</div><div class="test-group-body" id="grp-'+gid+'">';
-        kindOrder.forEach(function(k){
-          var kt=kindMap[k];if(!kt)return;
-          var kclass='kind-'+k;
-          var klabel=kindLabels[k]||k;
-          html+='<div class="kind-sub"><span class="kind-badge '+kclass+'">'+klabel+'</span> &mdash; '+kt.length+' tests</div>';
-          kt.forEach(function(t){
-            var tbc=t.outcome==='passed'?'badge-passed':t.outcome==='failed'?'badge-failed':t.outcome==='skipped'?'badge-skipped':'badge-error';
-            html+='<div class="test-item"><span class="badge '+tbc+'">'+t.outcome+'</span><span class="test-name">'+t.name+'</span><span class="test-duration">'+t.duration+'s</span></div>';
-          });
-        });
-        html+='</div></div>';gid++;
-      });
-      if(!html)html='<div class="empty-state">No tests match your search</div>';
-      container.innerHTML=html;
-    }
+    function renderTestSummary(){var el=document.getElementById('test-summary');if(!el||!D.tests.length){if(el)el.style.display='none';return;}var p=0,f=0,s=0,e=0;D.tests.forEach(function(t){if(t.o==='passed')p++;else if(t.o==='failed')f++;else if(t.o==='skipped')s++;else e++;});el.innerHTML='<div class="test-summary-item"><strong>'+D.tests.length+'</strong> total tests</div><div class="test-summary-item" style="color:var(--success)"><strong>'+p+'</strong> passed</div>'+(f?'<div class="test-summary-item" style="color:var(--danger)"><strong>'+f+'</strong> failed</div>':'')+(s?'<div class="test-summary-item" style="color:var(--warn)"><strong>'+s+'</strong> skipped</div>':'')+(e?'<div class="test-summary-item" style="color:var(--danger)"><strong>'+e+'</strong> errors</div>':'');}
+    function renderTests(q){var container=document.getElementById('test-groups');if(!container)return;if(!D.tests.length){container.innerHTML='<div class="empty-state">No test results available</div>';return;}var groups={};D.tests.forEach(function(t){var parts=t.n.split('::');var file=parts[0]||'unknown';if(!groups[file])groups[file]=[];groups[file].push({name:parts.slice(1).join(' :: '),outcome:t.o,duration:t.d,raw:t.n});});var keys=Object.keys(groups).sort();if(q){var ql=q.toLowerCase();keys=keys.filter(function(k){if(k.toLowerCase().indexOf(ql)>=0)return true;return groups[k].some(function(t){return t.raw.toLowerCase().indexOf(ql)>=0;});});}var html='';keys.forEach(function(file,idx){var tests=groups[file];if(q){var ql=q.toLowerCase();if(file.toLowerCase().indexOf(ql)<0){tests=tests.filter(function(t){return t.raw.toLowerCase().indexOf(ql)>=0;});}}var passed=tests.filter(function(t){return t.o==='passed';}).length;var failed=tests.filter(function(t){return t.o==='failed';}).length;var bc=failed>0?'badge-failed':'badge-passed';var st=failed>0?failed+' failed':'all passed';html+='<div class="test-group"><div class="test-group-header expanded" onclick="toggleGroup('+idx+')"><span class="chevron open" id="chev-'+idx+'">&#9654;</span><span style="flex:1;word-break:break-all">'+file+'</span><span class="badge '+bc+'">'+st+'</span><span style="color:var(--muted);font-size:0.78rem">'+tests.length+' tests</span></div><div class="test-group-body" id="grp-'+idx+'">';tests.forEach(function(t){var tbc=t.outcome==='passed'?'badge-passed':t.outcome==='failed'?'badge-failed':t.outcome==='skipped'?'badge-skipped':'badge-error';html+='<div class="test-item"><span class="badge '+tbc+'">'+t.outcome+'</span><span class="test-name">'+t.name+'</span><span class="test-duration">'+t.duration+'s</span></div>';});html+='</div></div>';});if(!html)html='<div class="empty-state">No tests match your search</div>';container.innerHTML=html;}
     window.toggleGroup=function(idx){var body=document.getElementById('grp-'+idx);var chev=document.getElementById('chev-'+idx);var hdr=chev.parentElement;if(body.style.display==='none'){body.style.display='block';chev.classList.add('open');hdr.classList.add('expanded');}else{body.style.display='none';chev.classList.remove('open');hdr.classList.remove('expanded');}};
     window.filterTests=function(){renderTests(document.getElementById('test-search').value);};
-    window.filterKind=function(kind,btn){activeKind=kind;document.querySelectorAll('.kind-btn').forEach(function(b){b.classList.remove('active');});if(btn)btn.classList.add('active');renderTests(document.getElementById('test-search').value);};
     window.switchTab=function(tab,btn){document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active');c.style.display='none';});var el=document.getElementById('tab-'+tab);if(el){el.classList.add('active');el.style.display='block';}if(btn)btn.classList.add('active');};
-    renderFileSummary();renderFiles();renderTestSummary();renderTests();
+    function getFailedTests(){return D.tests.filter(function(t){return t.o==='failed'||t.o==='error';});}
+    function escHtml(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+    function renderFailBadge(){var fails=getFailedTests();var badge=document.getElementById('fail-tab-badge');if(badge){badge.textContent=fails.length;if(fails.length===0)badge.classList.add('zero');else badge.classList.remove('zero');}}
+    function renderFailSummary(){var el=document.getElementById('fail-summary-banner');if(!el)return;var fails=getFailedTests();if(fails.length===0){el.innerHTML='';return;}var files={};fails.forEach(function(t){var parts=t.n.split('::');var f=parts[0]||'unknown';files[f]=true;});el.innerHTML='<div class="fail-summary-banner"><div style="text-align:center"><div class="fail-big-count">'+fails.length+'</div><div class="fail-big-label">failed test'+(fails.length!==1?'s':'')+'</div></div><div style="flex:1;display:flex;gap:2rem;flex-wrap:wrap"><div class="test-summary-item">across <strong>'+Object.keys(files).length+'</strong> file'+(Object.keys(files).length!==1?'s':'')+'</div></div></div>';}
+    function renderFailCards(q){var container=document.getElementById('fail-cards');if(!container)return;var fails=getFailedTests();if(fails.length===0){container.innerHTML='<div class="fail-zero-state"><div class="check-icon">&#10004;</div><div class="check-text">All tests passed!</div><div class="check-sub">No failures to display</div></div>';return;}if(q){var ql=q.toLowerCase();fails=fails.filter(function(t){return t.n.toLowerCase().indexOf(ql)>=0||(t.m||'').toLowerCase().indexOf(ql)>=0||(t.lr||'').toLowerCase().indexOf(ql)>=0;});}if(fails.length===0){container.innerHTML='<div class="empty-state">No failures match your search</div>';return;}var html='';fails.forEach(function(t,idx){var parts=t.n.split('::');var file=parts[0]||'unknown';var testName=parts.slice(1).join(' :: ')||t.n;var line=t.ln||'';var msg=t.m||'No error message captured';var lr=t.lr||'';html+='<div class="fail-card">';html+='<div class="fail-card-header"><span class="fail-icon">&#10060;</span><span class="fail-test-name">'+escHtml(testName)+'</span><span class="badge badge-failed">'+t.o+'</span></div>';html+='<div class="fail-card-location"><span class="loc-item"><strong>File:</strong> '+escHtml(file)+'</span>';if(line){html+='<span class="loc-item"><strong>Line:</strong> '+line+'</span>';}html+='<span class="loc-item"><strong>Duration:</strong> '+t.d+'s</span></div>';html+='<div class="fail-card-message"><div class="msg-label">Error</div><div class="msg-short">'+escHtml(msg)+'</div>';if(lr){html+='<div class="fail-traceback"><button class="fail-traceback-toggle" onclick="toggleTraceback('+idx+')">Show Full Traceback</button><pre class="fail-traceback-content" id="tb-'+idx+'">'+escHtml(lr)+'</pre></div>';}html+='</div></div>';});container.innerHTML=html;}
+    window.toggleTraceback=function(idx){var el=document.getElementById('tb-'+idx);var btn=el.previousElementSibling;if(el.style.display==='block'){el.style.display='none';btn.textContent='Show Full Traceback';}else{el.style.display='block';btn.textContent='Hide Traceback';}};
+    window.filterFailures=function(){renderFailCards(document.getElementById('fail-search').value);};
+    renderFileSummary();renderFiles();renderTestSummary();renderTests();renderFailBadge();renderFailSummary();renderFailCards();
   })();
   </script>
 </body>
