@@ -40,9 +40,10 @@ def update_contact(user_id):
         return jsonify({"message": "User not found"}), 404
 
     data = request.json
-    contact.first_name = data.get("firstName", contact.first_name)
-    contact.last_name = data.get("lastName", contact.last_name)
-    contact.email = data.get("email", contact.email)
+    contact.first_name = data["firstName"]
+contact.last_name = data["lastName"]
+contact.email = data["email"]
+
 
     db.session.commit()
 
