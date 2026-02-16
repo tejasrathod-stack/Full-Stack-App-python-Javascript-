@@ -1,0 +1,40 @@
+{
+  "runs": [
+    {
+      "timestamp": "2026-02-16T13:27:51.914099Z",
+      "files_generated": [
+        "test_unit_create_contact_01.py",
+        "test_integ_get_contacts_01.py",
+        "test_e2e_get_contacts_01.py"
+      ],
+      "file_count": 3,
+      "change_summary": {
+        "added_or_modified": 0,
+        "deleted": 0,
+        "total_analyzed": 0,
+        "coverage_target": "Maximum",
+        "detected_framework": "flask-db",
+        "project_structure": [
+          "config.py",
+          "main.py",
+          "models.py"
+        ]
+      },
+      "generation_metadata": {
+        "total_size_bytes": 14372,
+        "average_file_size": 4790,
+        "test_function_count": 18
+      }
+    }
+  ],
+  "statistics": {
+    "total_runs": 1,
+    "total_files_generated": 3,
+    "last_generation": "2026-02-16T13:27:51.914099Z",
+    "generation_summary": {
+      "unit_tests": 1,
+      "integration_tests": 1,
+      "e2e_tests": 1
+    }
+  }
+}
